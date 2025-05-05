@@ -6,11 +6,12 @@
 
 package cv.generator;
 
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -19,6 +20,7 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.GrayColor;
+import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -35,8 +37,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.awt.*;
@@ -67,29 +67,30 @@ import java.io.FileOutputStream;
 import com.itextpdf.text.List;
 import com.itextpdf.text.pdf.draw.VerticalPositionMark;
 import com.itextpdf.text.Rectangle;
+// import openai.*;
 //import com.itextpdf.text.pdf.PdfTemplate;
 
-
-
 public class CV extends javax.swing.JFrame {
-Connection conn=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
     /**
      * Creates new form Staff_details
      */
     public CV() {
         initComponents();
-        conn=db.java_db();
+        conn = db.java_db();
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
-        setLocation(size.width/2 - getWidth()/2, 
-        size.height/2 - getHeight()/2);
-    
+        setLocation(size.width / 2 - getWidth() / 2,
+                size.height / 2 - getHeight() / 2);
+
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jMenuBar2 = new javax.swing.JMenuBar();
@@ -211,19 +212,17 @@ PreparedStatement pst=null;
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_img, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+                jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lbl_img, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                                .addContainerGap()));
         jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_img, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+                jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lbl_img, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                                .addContainerGap()));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel26.setText("PERSONAL INFORMATION");
@@ -275,7 +274,9 @@ PreparedStatement pst=null;
 
         jLabel16.setText("Work Done:");
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Adobe Arabic", 1, 24))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search",
+                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Adobe Arabic", 1, 24))); // NOI18N
 
         jLabel17.setText("Search CV");
 
@@ -298,23 +299,23 @@ PreparedStatement pst=null;
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel17)
-                .addGap(18, 18, 18)
-                .addComponent(txt_search, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel17)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_search, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
+                                .addContainerGap()));
         jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel17))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Save-icon.png"))); // NOI18N
         jButton3.setText("Save CV");
@@ -342,283 +343,569 @@ PreparedStatement pst=null;
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel26)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel24)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_tel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel23)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel19))
-                                        .addGap(49, 49, 49)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txt_surname, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txt_firstname)
-                                            .addComponent(txt_add1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel21)
-                                        .addGap(49, 49, 49)
-                                        .addComponent(txt_add2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel22)
-                                            .addComponent(jLabel1))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txt_pc, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                                            .addComponent(txt_nationality)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel25)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(70, 70, 70)
-                                        .addComponent(jLabel12)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(70, 70, 70)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(txt_skill2, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                                                            .addComponent(txt_skill1))
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(txt_skill4, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                                                            .addComponent(txt_skill3)))
-                                                    .addComponent(jLabel2))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel10)
-                                                        .addGap(21, 21, 21)
-                                                        .addComponent(txt_company1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel11)
-                                                        .addGap(21, 21, 21)
-                                                        .addComponent(txt_company2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel15)
-                                                        .addGap(44, 44, 44)
-                                                        .addComponent(txt_worktwo, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel14)
-                                                        .addGap(44, 44, 44)
-                                                        .addComponent(txt_workone, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jLabel13)
-                                                            .addComponent(jLabel16))
-                                                        .addGap(21, 21, 21)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(txt_workthree, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(txt_company3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel9)
-                                                .addGap(25, 25, 25))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addGap(25, 25, 25)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txt_qual1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txt_university, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txt_qual2, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(22, 22, 22)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                        false)
+                                                                        .addComponent(jLabel26)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(jLabel24)
+                                                                                .addPreferredGap(
+                                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        Short.MAX_VALUE)
+                                                                                .addComponent(txt_tel,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        168,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(jLabel23)
+                                                                                .addPreferredGap(
+                                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        Short.MAX_VALUE)
+                                                                                .addComponent(txt_dob,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        168,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addGroup(
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                layout.createSequentialGroup()
+                                                                                        .addGroup(layout
+                                                                                                .createParallelGroup(
+                                                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                .addComponent(jLabel4)
+                                                                                                .addComponent(jLabel5)
+                                                                                                .addComponent(jLabel19))
+                                                                                        .addGap(49, 49, 49)
+                                                                                        .addGroup(layout
+                                                                                                .createParallelGroup(
+                                                                                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                                        false)
+                                                                                                .addComponent(
+                                                                                                        txt_surname,
+                                                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                .addComponent(
+                                                                                                        txt_firstname)
+                                                                                                .addComponent(txt_add1,
+                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                        168,
+                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                        .addGroup(
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                layout.createSequentialGroup()
+                                                                                        .addComponent(jLabel21)
+                                                                                        .addGap(49, 49, 49)
+                                                                                        .addComponent(txt_add2,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                168,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addGroup(
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                layout.createSequentialGroup()
+                                                                                        .addGroup(layout
+                                                                                                .createParallelGroup(
+                                                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                .addComponent(jLabel22)
+                                                                                                .addComponent(jLabel1))
+                                                                                        .addPreferredGap(
+                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addGroup(layout
+                                                                                                .createParallelGroup(
+                                                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                        false)
+                                                                                                .addComponent(txt_pc,
+                                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                        168,
+                                                                                                        Short.MAX_VALUE)
+                                                                                                .addComponent(
+                                                                                                        txt_nationality)))
+                                                                        .addGroup(
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                layout.createSequentialGroup()
+                                                                                        .addComponent(jLabel25)
+                                                                                        .addPreferredGap(
+                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addComponent(txt_email,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                168,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(70, 70, 70)
+                                                                                .addComponent(jLabel12)
+                                                                                .addGap(0, 0, Short.MAX_VALUE))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGroup(layout.createParallelGroup(
+                                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addGroup(layout
+                                                                                                .createSequentialGroup()
+                                                                                                .addGap(70, 70, 70)
+                                                                                                .addGroup(layout
+                                                                                                        .createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                        .addGroup(layout
+                                                                                                                .createSequentialGroup()
+                                                                                                                .addGroup(
+                                                                                                                        layout.createParallelGroup(
+                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                                                false)
+                                                                                                                                .addComponent(
+                                                                                                                                        txt_skill2,
+                                                                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                        168,
+                                                                                                                                        Short.MAX_VALUE)
+                                                                                                                                .addComponent(
+                                                                                                                                        txt_skill1))
+                                                                                                                .addPreferredGap(
+                                                                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                                                .addGroup(
+                                                                                                                        layout.createParallelGroup(
+                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                                                false)
+                                                                                                                                .addComponent(
+                                                                                                                                        txt_skill4,
+                                                                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                        168,
+                                                                                                                                        Short.MAX_VALUE)
+                                                                                                                                .addComponent(
+                                                                                                                                        txt_skill3)))
+                                                                                                        .addComponent(
+                                                                                                                jLabel2))
+                                                                                                .addPreferredGap(
+                                                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                        Short.MAX_VALUE))
+                                                                                        .addGroup(
+                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                                layout.createSequentialGroup()
+                                                                                                        .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                Short.MAX_VALUE)
+                                                                                                        .addGroup(layout
+                                                                                                                .createParallelGroup(
+                                                                                                                        javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                                                .addGroup(
+                                                                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                                        layout.createSequentialGroup()
+                                                                                                                                .addComponent(
+                                                                                                                                        jLabel10)
+                                                                                                                                .addGap(21,
+                                                                                                                                        21,
+                                                                                                                                        21)
+                                                                                                                                .addComponent(
+                                                                                                                                        txt_company1,
+                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                        132,
+                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                                                .addGroup(
+                                                                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                                        layout.createSequentialGroup()
+                                                                                                                                .addComponent(
+                                                                                                                                        jLabel11)
+                                                                                                                                .addGap(21,
+                                                                                                                                        21,
+                                                                                                                                        21)
+                                                                                                                                .addComponent(
+                                                                                                                                        txt_company2,
+                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                        132,
+                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                                                .addGroup(
+                                                                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                                        layout.createSequentialGroup()
+                                                                                                                                .addComponent(
+                                                                                                                                        jLabel15)
+                                                                                                                                .addGap(44,
+                                                                                                                                        44,
+                                                                                                                                        44)
+                                                                                                                                .addComponent(
+                                                                                                                                        txt_worktwo,
+                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                        259,
+                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                                                .addGroup(
+                                                                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                                        layout.createSequentialGroup()
+                                                                                                                                .addComponent(
+                                                                                                                                        jLabel14)
+                                                                                                                                .addGap(44,
+                                                                                                                                        44,
+                                                                                                                                        44)
+                                                                                                                                .addComponent(
+                                                                                                                                        txt_workone,
+                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                        259,
+                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                                                .addGroup(
+                                                                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                                        layout.createSequentialGroup()
+                                                                                                                                .addGroup(
+                                                                                                                                        layout.createParallelGroup(
+                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                                                .addComponent(
+                                                                                                                                                        jLabel13)
+                                                                                                                                                .addComponent(
+                                                                                                                                                        jLabel16))
+                                                                                                                                .addGap(21,
+                                                                                                                                        21,
+                                                                                                                                        21)
+                                                                                                                                .addGroup(
+                                                                                                                                        layout.createParallelGroup(
+                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                                                .addComponent(
+                                                                                                                                                        txt_workthree,
+                                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                                        259,
+                                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                .addComponent(
+                                                                                                                                                        txt_company3,
+                                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                                        132,
+                                                                                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                                                                        .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                                                                .addComponent(jDesktopPane1,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel8)
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel6)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGroup(layout.createParallelGroup(
+                                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addGroup(
+                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                                layout.createSequentialGroup()
+                                                                                                        .addComponent(
+                                                                                                                jLabel9)
+                                                                                                        .addGap(25, 25,
+                                                                                                                25))
+                                                                                        .addGroup(
+                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                                layout.createSequentialGroup()
+                                                                                                        .addComponent(
+                                                                                                                jLabel3,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                130,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                        .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                                                                        .addGroup(layout
+                                                                                                .createSequentialGroup()
+                                                                                                .addComponent(jLabel7)
+                                                                                                .addGap(25, 25, 25)))
+                                                                                .addGroup(layout.createParallelGroup(
+                                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addComponent(txt_qual1,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                472,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(txt_university,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                472,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(txt_qual2,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                472,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                .addPreferredGap(
+                                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        Short.MAX_VALUE)
+                                                                                .addGroup(layout.createParallelGroup(
+                                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addGroup(
+                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                                layout.createParallelGroup(
+                                                                                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                                        false)
+                                                                                                        .addComponent(
+                                                                                                                jButton2,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                Short.MAX_VALUE)
+                                                                                                        .addComponent(
+                                                                                                                jButton1,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                Short.MAX_VALUE))
+                                                                                        .addComponent(jButton3,
+                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                113,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                .addContainerGap(40, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txt_add1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel19))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txt_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(txt_surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_add2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel22)
-                            .addComponent(txt_pc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txt_nationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
-                            .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_tel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel24))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel25)
-                            .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel26)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(layout
+                                                                .createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(txt_add1,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jLabel19))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                        .addComponent(jLabel4)
+                                                                        .addComponent(txt_firstname,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel5)
+                                                                        .addComponent(txt_surname,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(29, 29, 29)))
+                                                .addGap(10, 10, 10)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txt_add2, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel21))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel22)
+                                                        .addComponent(txt_pc, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(8, 8, 8)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel1)
+                                                        .addComponent(txt_nationality,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel23)
+                                                        .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txt_tel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel24))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel25)
+                                                        .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel12)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jDesktopPane1,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(txt_skill3,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(
+                                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(txt_skill4,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(txt_skill1,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(
+                                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(txt_skill2,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(20, 20, 20)
+                                                                                .addComponent(jLabel2)))
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                        .addComponent(jLabel10)
+                                                                        .addComponent(txt_company1,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                        .addComponent(txt_workone,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLabel14))
+                                                                .addGap(9, 9, 9)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                        .addComponent(jLabel11)
+                                                                        .addComponent(txt_company2,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(16, 16, 16)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                        .addComponent(txt_worktwo,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLabel15))
+                                                                .addGap(12, 12, 12)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                        .addComponent(jLabel13)
+                                                                        .addComponent(txt_company3,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                        .addComponent(txt_workthree,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLabel16))))))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txt_skill3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_skill4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txt_skill1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_skill2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(20, 20, 20)
-                                        .addComponent(jLabel2)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(txt_company1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txt_workone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14))
-                                .addGap(9, 9, 9)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(txt_company2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txt_worktwo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel15))
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel13)
-                                    .addComponent(txt_company3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txt_workthree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel16))))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_university, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_qual1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_qual2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(jLabel8))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel6)
+                                                .addGap(21, 21, 21)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txt_university,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel3))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txt_qual1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel7))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txt_qual2, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel9)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(159, 159, 159)
+                                                .addComponent(jLabel8))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(41, 41, 41)
+                                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(55, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
 
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
 
-        filename =f.getAbsolutePath();
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(lbl_img.getWidth(), lbl_img.getHeight(), Image.DEFAULT));
+        filename = f.getAbsolutePath();
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(lbl_img.getWidth(),
+                lbl_img.getHeight(), Image.DEFAULT));
         lbl_img.setIcon(imageIcon);
-      try {
+        try {
 
             File image = new File(filename);
-            FileInputStream fis = new FileInputStream (image);
-            ByteArrayOutputStream bos= new ByteArrayOutputStream();
+            FileInputStream fis = new FileInputStream(image);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
             byte[] buf = new byte[1024];
 
-            for(int readNum; (readNum=fis.read(buf))!=-1; ){
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
 
-                bos.write(buf,0,readNum);
+                bos.write(buf, 0, readNum);
             }
-            person_image=bos.toByteArray();
+            person_image = bos.toByteArray();
         }
 
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
 
         }
 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }// GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       
+
         txt_firstname.setText("");
         txt_surname.setText("");
         txt_tel.setText("");
@@ -645,290 +932,410 @@ PreparedStatement pst=null;
         txt_company3.setText("");
         txt_search.setText("");
         lbl_img.setIcon(null);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }// GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        
-            JFileChooser dialog = new JFileChooser();
-            dialog.setSelectedFile(new File(txt_firstname.getText()+" "+txt_surname.getText()+"-CV"+".pdf"));
-            int dialogResult = dialog.showSaveDialog(null);
-            if (dialogResult==JFileChooser.APPROVE_OPTION){
-            String filePath = dialog.getSelectedFile().getPath();
-           
+    public static String summarizeSkills(String skills) {
+        String summary = "";
         try {
-            // TODO add your handling code here:
-          Document myDocument = new Document();
-          PdfWriter myWriter = PdfWriter.getInstance(myDocument, new FileOutputStream(filePath));
-         
-          myDocument.open();
-          
-          Image image = Image.getInstance(person_image);
-          image.setAbsolutePosition(473f, 750f);
-          image.scaleAbsolute(80f,70f);
-                  
-         
-          PdfPTable table = new PdfPTable(2);
-         // table.getDefaultCell().setBorder(0);
-          myDocument.add(image);
-          myDocument.add(new Paragraph(txt_firstname.getText()+"  "+txt_surname.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,32,Font.BOLD,BaseColor.DARK_GRAY ))); 
-          myDocument.add(new Paragraph("",FontFactory.getFont(FontFactory.TIMES_BOLD,9,Font.PLAIN,BaseColor.DARK_GRAY))); 
-          myDocument.add(new Paragraph("",FontFactory.getFont(FontFactory.TIMES_BOLD,9,Font.PLAIN,BaseColor.DARK_GRAY)));
-          myDocument.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
-          myDocument.add(new Paragraph("CONTACT DETAILS",FontFactory.getFont(FontFactory.TIMES_BOLD,9,Font.BOLD,BaseColor.DARK_GRAY ))); 
-          myDocument.add(new Paragraph(txt_email.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN,BaseColor.DARK_GRAY  )));
-          myDocument.add(new Paragraph(txt_tel.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN ,BaseColor.DARK_GRAY )));
-          myDocument.add(new Paragraph(txt_add1.getText() +", "+txt_add2.getText()+", "+txt_pc.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN,BaseColor.DARK_GRAY  )));
-          myDocument.add(new Paragraph(txt_nationality.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN,BaseColor.DARK_GRAY  )));
-          myDocument.add(new Paragraph(txt_dob.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN,BaseColor.DARK_GRAY  )));  
-          myDocument.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
-          myDocument.add(new Paragraph("SKILLS",FontFactory.getFont(FontFactory.TIMES_BOLD,9,Font.BOLD,BaseColor.DARK_GRAY  )));
-          table.setHeaderRows(1);
-          /*PdfPCell cell;
-          cell = new PdfPCell(new Phrase("The below are my skills"));
-          cell.setColspan(1);
-          table.addCell(cell);
-          cell = new PdfPCell(new Phrase("SKILLS"));
-          cell.setRowspan(1);
-          table.addCell(cell);*/
-          table.addCell(txt_skill1.getText());
-          table.addCell(txt_skill2.getText());
-          table.addCell(txt_skill3.getText());
-          table.addCell(txt_skill4.getText());
-          myDocument.add(table);
-          myDocument.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
-          myDocument.add(new Paragraph("QUALIFICATIONS",FontFactory.getFont(FontFactory.TIMES_BOLD,9,Font.BOLD,BaseColor.DARK_GRAY  )));
-          myDocument.add(new Paragraph(txt_university.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN,BaseColor.DARK_GRAY  )));   
-          myDocument.add(new Paragraph(txt_qual1.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN,BaseColor.DARK_GRAY  )));   
-          myDocument.add(new Paragraph(txt_qual2.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN,BaseColor.DARK_GRAY  )));   
-          myDocument.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
-          myDocument.add(new Paragraph("WORK EXPERIENCE",FontFactory.getFont(FontFactory.TIMES_BOLD,10,Font.BOLD,BaseColor.DARK_GRAY  )));
-          myDocument.add(new Paragraph(txt_company1.getText()+System.lineSeparator()+txt_workone.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN,BaseColor.DARK_GRAY)));
-          myDocument.add(new Paragraph(txt_company2.getText()+System.lineSeparator()+txt_worktwo.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN,BaseColor.DARK_GRAY)));
-          myDocument.add(new Paragraph(txt_company3.getText()+System.lineSeparator()+txt_workthree.getText(),FontFactory.getFont(FontFactory.TIMES_BOLD,7,Font.PLAIN,BaseColor.DARK_GRAY)));
-          myDocument.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
-          myDocument.add(new Paragraph("REFERENCES",FontFactory.getFont(FontFactory.TIMES_BOLD,9,Font.BOLD,BaseColor.DARK_GRAY  )));
-          myDocument.add(new Paragraph("Available upon request",FontFactory.getFont(FontFactory.TIMES_BOLD,6,Font.PLAIN,BaseColor.DARK_GRAY  )));
+            // Define the Python command to run the script
+            String pythonScriptPath = "C:\\Users\\Punit\\Downloads\\CV-Builder\\CV Generator\\src\\cv\\generator\\summarization.py"; // Ensure
+                                                                                                                                     // the
+                                                                                                                                     // path
+                                                                                                                                     // is
+                                                                                                                                     // correct
 
+            // Prepare the command to execute the Python script
+            ProcessBuilder pb = new ProcessBuilder(
+                    "C:\\Users\\Punit\\AppData\\Local\\Programs\\Python\\Python312\\python.exe", pythonScriptPath,
+                    skills);
+            pb.redirectErrorStream(true); // Redirect error stream to output stream
+            Process process = pb.start(); // Start the process
 
-          myDocument.close();  
-          JOptionPane.showMessageDialog(null,"CV was successfully generated");
-            
-     }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-     }
-     finally {
-            
-            try{
-                rs.close();
-                pst.close();
-                
+            // Capture the Python output (the summary)
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder output = new StringBuilder();
+            String line;
+
+            // Read the output from the Python script
+            while ((line = reader.readLine()) != null) {
+                output.append(line).append("\n");
             }
-            catch(Exception e){
-           
-         
+
+            // Wait for the process to finish and get the exit code
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                summary = output.toString().trim(); // Success, get the output
+            } else {
+                summary = "Error: Python script exited with code " + exitCode; // Handle errors
             }
-     }
-   }
-    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txt_firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_firstnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_firstnameActionPerformed
+        } catch (Exception e) {
+            e.printStackTrace();
+            summary = "Error occurred while summarizing skills.";
+        }
 
-    private void txt_add2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_add2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_add2ActionPerformed
+        return summary; // Return the summary or error message
+    }
 
-    private void txt_qual1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_qual1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_qual1ActionPerformed
+    String skillset = "";
 
-    private void txt_skill2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_skill2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_skill2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        JFileChooser dialog = new JFileChooser();
+        dialog.setSelectedFile(new File(txt_firstname.getText() + " " + txt_surname.getText() + "-CV" + ".pdf"));
+        int dialogResult = dialog.showSaveDialog(null);
+        if (dialogResult == JFileChooser.APPROVE_OPTION) {
+            String filePath = dialog.getSelectedFile().getPath();
+            try {
+                Document myDocument = new Document();
+                PdfWriter myWriter = PdfWriter.getInstance(myDocument, new FileOutputStream(filePath));
+                myDocument.open();
 
-    private void txt_skill4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_skill4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_skill4ActionPerformed
+                // Draw a border around the page
+                PdfContentByte canvas = myWriter.getDirectContent();
+                Rectangle pageSize = myDocument.getPageSize();
+                float borderInset = 10; // Adjust this value for border thickness
+                canvas.setLineWidth(1); // Border thickness
+                canvas.rectangle(borderInset, borderInset, pageSize.getWidth() - 2 * borderInset,
+                        pageSize.getHeight() - 2 * borderInset);
+                canvas.stroke();
 
-    private void txt_searchComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_txt_searchComponentRemoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_searchComponentRemoved
+                // Add your image
+                Image image = Image.getInstance(person_image);
+                image.setAbsolutePosition(473f, 750f);
+                image.scaleAbsolute(80f, 70f);
+                myDocument.add(image);
+                skillset = txt_skill1.getText() + txt_skill2.getText() + txt_skill3.getText() + txt_skill4.getText()
+                        + txt_university.getText() + txt_qual1.getText() + txt_qual2.getText() + txt_company1.getText()
+                        + txt_workone.getText() + txt_company2.getText() + txt_worktwo.getText()
+                        + txt_company3.getText() + txt_workthree.getText();
 
-    private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_searchActionPerformed
+                // Header
+                myDocument.add(new Paragraph(txt_firstname.getText() + "  " + txt_surname.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 32, Font.BOLD, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph("",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 9, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph("",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 9, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(
+                        "----------------------------------------------------------------------------------------------------------------------------------"));
+                myDocument.add(new Paragraph("OBJECTIVE",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 20, Font.BOLD, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(summarizeSkills(skillset),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(
+                        "----------------------------------------------------------------------------------------------------------------------------------"));
+                myDocument.add(new Paragraph("CONTACT DETAILS",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 20, Font.BOLD, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(txt_email.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(txt_tel.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(txt_add1.getText() + ", " + txt_add2.getText() + ", " + txt_pc.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(txt_nationality.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(txt_dob.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(
+                        "----------------------------------------------------------------------------------------------------------------------------------"));
+                // Add Skills Section
+                myDocument.add(new Paragraph("SKILLS",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 20, Font.BOLD, BaseColor.DARK_GRAY)));
 
-    private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
-        // TODO add your handling code here:
-        try{
+                // Create a table for Skills
+                PdfPTable skillsTable = new PdfPTable(2); // 2 columns for Skill Name and Description (or just Skill
+                                                          // Name)
+                skillsTable.setWidthPercentage(100); // Set table width to 100%
+                skillsTable.setSpacingBefore(10f); // Add some space before the table
+                skillsTable.setSpacingAfter(10f); // Add some space after the table
+
+                // Add headers to the table
+                skillsTable.addCell(new PdfPCell(new Paragraph("Skill",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.BOLD, BaseColor.WHITE))));
+                skillsTable.addCell(new PdfPCell(new Paragraph("Proficiency Level",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.BOLD, BaseColor.WHITE))));
+
+                // Set header background color
+                skillsTable.getRow(0).getCells()[0].setBackgroundColor(BaseColor.DARK_GRAY);
+                skillsTable.getRow(0).getCells()[1].setBackgroundColor(BaseColor.DARK_GRAY);
+
+                // Add skills entries to the table
+                skillsTable.addCell(new PdfPCell(new Paragraph(txt_skill1.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                skillsTable.addCell(new PdfPCell(new Paragraph("Proficiency Level for " + txt_skill1.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                skillsTable.addCell(new PdfPCell(new Paragraph(txt_skill2.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                skillsTable.addCell(new PdfPCell(new Paragraph("Proficiency Level for " + txt_skill2.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                skillsTable.addCell(new PdfPCell(new Paragraph(txt_skill3.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                skillsTable.addCell(new PdfPCell(new Paragraph("Proficiency Level for " + txt_skill3.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                skillsTable.addCell(new PdfPCell(new Paragraph(txt_skill4.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                skillsTable.addCell(new PdfPCell(new Paragraph("Proficiency Level for " + txt_skill4.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+
+                // Add the skills table to the document
+                myDocument.add(skillsTable);
+                myDocument.add(new Paragraph(
+                        "----------------------------------------------------------------------------------------------------------------------------------"));
+                myDocument.add(new Paragraph("QUALIFICATIONS",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 20, Font.BOLD, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(txt_university.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(txt_qual1.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(txt_qual2.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph(
+                        "----------------------------------------------------------------------------------------------------------------------------------"));
+                // Add Work Experience Section
+                myDocument.add(new Paragraph("WORK EXPERIENCE",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 20, Font.BOLD, BaseColor.DARK_GRAY)));
+
+                // Create a table for Work Experience
+                PdfPTable workExperienceTable = new PdfPTable(2); // 2 columns for Company and Description
+                workExperienceTable.setWidthPercentage(100); // Set table width to 100%
+                workExperienceTable.setSpacingBefore(10f); // Add some space before the table
+                workExperienceTable.setSpacingAfter(10f); // Add some space after the table
+
+                // Add headers to the table
+                workExperienceTable.addCell(new PdfPCell(new Paragraph("Company",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.BOLD, BaseColor.WHITE))));
+                workExperienceTable.addCell(new PdfPCell(new Paragraph("Description",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.BOLD, BaseColor.WHITE))));
+
+                // Set header background color
+                workExperienceTable.getRow(0).getCells()[0].setBackgroundColor(BaseColor.DARK_GRAY);
+                workExperienceTable.getRow(0).getCells()[1].setBackgroundColor(BaseColor.DARK_GRAY);
+
+                // Add work experience entries to the table
+                workExperienceTable.addCell(new PdfPCell(new Paragraph(txt_company1.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                workExperienceTable.addCell(new PdfPCell(new Paragraph(txt_workone.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                workExperienceTable.addCell(new PdfPCell(new Paragraph(txt_company2.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                workExperienceTable.addCell(new PdfPCell(new Paragraph(txt_worktwo.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                workExperienceTable.addCell(new PdfPCell(new Paragraph(txt_company3.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+                workExperienceTable.addCell(new PdfPCell(new Paragraph(txt_workthree.getText(),
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY))));
+
+                // Add the work experience table to the document
+                myDocument.add(workExperienceTable);
+                myDocument.add(new Paragraph(
+                        "----------------------------------------------------------------------------------------------------------------------------------"));
+                myDocument.add(new Paragraph("REFERENCES",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 20, Font.BOLD, BaseColor.DARK_GRAY)));
+                myDocument.add(new Paragraph("Available upon request",
+                        FontFactory.getFont(FontFactory.TIMES_BOLD, 10, Font.PLAIN, BaseColor.DARK_GRAY)));
+
+                myDocument.close();
+                JOptionPane.showMessageDialog(null, "CV was successfully generated");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            } finally {
+                try {
+                    rs.close();
+                    pst.close();
+                } catch (Exception e) {
+                    // Handle exceptions
+                }
+            }
+        }
+    }
+
+    private void txt_firstnameActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_firstnameActionPerformed
+    }
+
+    private void txt_add2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_add2ActionPerformed
+    }
+
+    private void txt_qual1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_qual1ActionPerformed
+    }
+
+    private void txt_skill2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_skill2ActionPerformed
+    }
+
+    private void txt_skill4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_skill4ActionPerformed
+    }
+
+    private void txt_searchComponentRemoved(java.awt.event.ContainerEvent evt) {// GEN-FIRST:event_txt_searchComponentRemoved
+    }
+
+    private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_searchActionPerformed
+    }
+
+    private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_txt_searchKeyReleased
+        try {
             String sql = "select * from cv where firstname=?";
 
-            pst=conn.prepareStatement(sql);
-            pst.setString(1,txt_search.getText());
-            rs=pst.executeQuery();
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, txt_search.getText());
+            rs = pst.executeQuery();
 
-            String add1 =rs.getString("firstname");
+            String add1 = rs.getString("firstname");
             txt_firstname.setText(add1);
 
-            String add2 =rs.getString("surname");
+            String add2 = rs.getString("surname");
             txt_surname.setText(add2);
 
-            String add3 =rs.getString("add1");
+            String add3 = rs.getString("add1");
             txt_add1.setText(add3);
 
-            String add4 =rs.getString("add2");
+            String add4 = rs.getString("add2");
             txt_add2.setText(add4);
 
-            String add5 =rs.getString("dob");
+            String add5 = rs.getString("dob");
             txt_dob.setText(add5);
 
-            String add6 =rs.getString("postcode");
+            String add6 = rs.getString("postcode");
             txt_pc.setText(add6);
 
-            String add7 =rs.getString("email");
+            String add7 = rs.getString("email");
             txt_email.setText(add7);
 
-            String add8 =rs.getString("telephone");
+            String add8 = rs.getString("telephone");
             txt_tel.setText(add8);
 
-            String add9 =rs.getString("nationality");
+            String add9 = rs.getString("nationality");
             txt_nationality.setText(add9);
 
-            String add10 =rs.getString("university");
+            String add10 = rs.getString("university");
             txt_university.setText(add10);
-            
-            String add12 =rs.getString("qual1");
+
+            String add12 = rs.getString("qual1");
             txt_qual1.setText(add12);
 
-            String add13 =rs.getString("qual2");
+            String add13 = rs.getString("qual2");
             txt_qual2.setText(add13);
 
-            String add14 =rs.getString("skill1");
+            String add14 = rs.getString("skill1");
             txt_skill1.setText(add14);
 
-            String add15 =rs.getString("skill2");
+            String add15 = rs.getString("skill2");
             txt_skill2.setText(add15);
 
-            String add16 =rs.getString("skill3");
+            String add16 = rs.getString("skill3");
             txt_skill3.setText(add16);
 
-            String add17 =rs.getString("skill4");
+            String add17 = rs.getString("skill4");
             txt_skill4.setText(add17);
-            
-            String add18 =rs.getString("wdone1");
+
+            String add18 = rs.getString("wdone1");
             txt_workone.setText(add18);
 
-            String add19 =rs.getString("wdone2");
+            String add19 = rs.getString("wdone2");
             txt_worktwo.setText(add19);
-            
-            String add20 =rs.getString("wdone3");
+
+            String add20 = rs.getString("wdone3");
             txt_workthree.setText(add20);
 
-            String add21 =rs.getString("company1");
+            String add21 = rs.getString("company1");
             txt_company1.setText(add21);
-            
-            String add22 =rs.getString("company2");
+
+            String add22 = rs.getString("company2");
             txt_company2.setText(add22);
-            
-            String add23 =rs.getString("company3");
+
+            String add23 = rs.getString("company3");
             txt_company3.setText(add23);
-            
 
             byte[] img = rs.getBytes("Image");
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(lbl_img.getWidth(), lbl_img.getHeight(), Image.DEFAULT));
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(lbl_img.getWidth(),
+                    lbl_img.getHeight(), Image.DEFAULT));
             lbl_img.setIcon(imageIcon);
 
-        }catch(Exception e){
-            //JOptionPane.showMessageDialog(null, "Missing Data");
-        }
-        finally {
+        } catch (Exception e) {
+            // JOptionPane.showMessageDialog(null, "Missing Data");
+        } finally {
 
-            try{
+            try {
 
                 rs.close();
                 pst.close();
 
-            }
-            catch(Exception e){
+            } catch (Exception e) {
 
             }
         }
-    }//GEN-LAST:event_txt_searchKeyReleased
+    }// GEN-LAST:event_txt_searchKeyReleased
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
-        int p = JOptionPane.showConfirmDialog(null, "Are you sure you want to add record?","Add Record",JOptionPane.YES_NO_OPTION);
-        if(p==0){        // TODO add your handling code here:
 
-        try {
+        int p = JOptionPane.showConfirmDialog(null, "Are you sure you want to add record?", "Add Record",
+                JOptionPane.YES_NO_OPTION);
+        if (p == 0) { // TODO add your handling code here:
 
-            String sql ="insert into CV (firstname,surname,add1,add2,postcode,nationality,dob,image,telephone,"
-                    + "email,skill1,skill2,skill3,skill4,company1,company2,company3,wdone1,wdone2,wdone3,university,qual1,qual2)"
-                     +" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+            try {
 
-            pst=conn.prepareStatement(sql);
-            pst.setString(1,txt_firstname.getText());
-            pst.setString(2,txt_surname.getText());
-            pst.setString(3,txt_add1.getText());
-            pst.setString(4,txt_add2.getText());
-            pst.setString(5,txt_pc.getText());
-            pst.setString(6,txt_nationality.getText());
-            pst.setString(7,txt_dob.getText());
-            pst.setBytes(8,person_image);
-            pst.setString(9,txt_tel.getText());
-            pst.setString(10,txt_email.getText());
-            pst.setString(11,txt_skill1.getText());
-            pst.setString(12,txt_skill2.getText());
-            pst.setString(13,txt_skill3.getText());
-            pst.setString(14,txt_skill4.getText());
-            pst.setString(15,txt_company1.getText());
-            pst.setString(16,txt_company2.getText());
-            pst.setString(17,txt_company3.getText());
-            pst.setString(18,txt_workone.getText());
-            pst.setString(19,txt_worktwo.getText());
-            pst.setString(20,txt_workthree.getText());
-            pst.setString(21,txt_university.getText());
-            pst.setString(22,txt_qual1.getText());
-            pst.setString(23,txt_qual2.getText());
-            
-            
-             
-            pst.execute();
-            JOptionPane.showMessageDialog(null,"Data is saved successfully");
+                String sql = "insert into CV (firstname,surname,add1,add2,postcode,nationality,dob,image,telephone,"
+                        + "email,skill1,skill2,skill3,skill4,company1,company2,company3,wdone1,wdone2,wdone3,university,qual1,qual2)"
+                        + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 
-        }
-        catch (Exception e)
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, txt_firstname.getText());
+                pst.setString(2, txt_surname.getText());
+                pst.setString(3, txt_add1.getText());
+                pst.setString(4, txt_add2.getText());
+                pst.setString(5, txt_pc.getText());
+                pst.setString(6, txt_nationality.getText());
+                pst.setString(7, txt_dob.getText());
+                pst.setBytes(8, person_image);
+                pst.setString(9, txt_tel.getText());
+                pst.setString(10, txt_email.getText());
+                pst.setString(11, txt_skill1.getText());
+                pst.setString(12, txt_skill2.getText());
+                pst.setString(13, txt_skill3.getText());
+                pst.setString(14, txt_skill4.getText());
+                pst.setString(15, txt_company1.getText());
+                pst.setString(16, txt_company2.getText());
+                pst.setString(17, txt_company3.getText());
+                pst.setString(18, txt_workone.getText());
+                pst.setString(19, txt_worktwo.getText());
+                pst.setString(20, txt_workthree.getText());
+                pst.setString(21, txt_university.getText());
+                pst.setString(22, txt_qual1.getText());
+                pst.setString(23, txt_qual2.getText());
 
-        {
-            JOptionPane.showMessageDialog(null,e);
-        }
-        finally {
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Data is saved successfully");
 
-            try{
-                rs.close();
-                pst.close();
+            } catch (Exception e)
 
-            }
-            catch(Exception e){
+            {
+                JOptionPane.showMessageDialog(null, e);
+            } finally {
 
+                try {
+                    rs.close();
+                    pst.close();
+
+                } catch (Exception e) {
+
+                }
             }
         }
-        }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }// GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -946,22 +1353,22 @@ PreparedStatement pst=null;
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1033,13 +1440,12 @@ PreparedStatement pst=null;
     private javax.swing.JTextField txt_workthree;
     private javax.swing.JTextField txt_worktwo;
     // End of variables declaration//GEN-END:variables
-     
-    private ImageIcon format =null;
-    //strin filename
+
+    private ImageIcon format = null;
+    // strin filename
     String filename = null;
     byte[] person_image = null;
-    
+
     private String gender;
-    
-    
+
 }
